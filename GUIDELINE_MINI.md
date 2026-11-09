@@ -2,6 +2,22 @@
 
 > Điền nội dung này trước khi bắt đầu gán nhãn. Giữ lại các quyết định sau khi self-QC.
 
+## Quy ước ID lớp
+
+Bản nhãn ban đầu dùng thứ tự ID theo README/`data.yaml` gốc: `0 car, 1 truck, 2 bus, 3 van`.
+
+Khi chấm với `gold_train_labels/`, tôi phát hiện id bị lệch so với README và data.yaml. Nhãn eval có sẵn trong repo (`dataset/labels/eval/`) cũng dùng cùng quy ước với gold.
+
+**Quyết định:** để nhãn train nhất quán với gold train và nhãn eval dùng khi train/đánh giá, tôi chuyển toàn bộ nhãn của mình sang quy ước của gold và cập nhật `data.yaml` cho khớp:
+
+| ID | Lớp (quy ước mới, theo gold) | ID cũ theo README |
+| ---: | --- | ---: |
+| 0 | `car` | 0 |
+| 1 | `van` | 3 |
+| 2 | `truck` | 1 |
+| 3 | `bus` | 2 |
+
+
 ## Định nghĩa lớp
 
 | Lớp | Định nghĩa của bạn | Ví dụ/điểm phân biệt |
@@ -17,6 +33,7 @@
 - Vật thể bị che khuất: nếu phần nhìn thấy vẫn đủ để nhận ra lớp thì vẽ box quanh **phần nhìn thấy**, không đoán phần bị che. Hai xe chồng nhau thì vẽ hai box riêng, mỗi box ôm phần nhìn thấy của xe đó.
 - Vật thể bị cắt bởi rìa ảnh: vẫn gán nhãn nếu nhận ra lớp; cạnh box đặt đúng tại rìa ảnh, không kéo ra ngoài ảnh hay đoán phần nằm ngoài khung.
 - Vật thể rất nhỏ/mơ hồ: nếu xe ở xa hoặc chỉ còn mảnh nhỏ mà vẫn nhận ra chắc lớp thì gán; nếu không xác định chắc được lớp thì **không đoán**, ghi tên ảnh vào bảng ca mơ hồ bên dưới và hỏi giảng viên. Không gán xe máy, xe đạp, người đi bộ, xe trong gương/kính hoặc hình xe trên biển quảng cáo.
+
 
 ## Ghi lại quyết định cho ít nhất ba ca mơ hồ
 
