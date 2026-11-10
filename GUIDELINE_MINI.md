@@ -39,6 +39,7 @@ Khi chấm với `gold_train_labels/`, tôi phát hiện id bị lệch so với
 
 | Ảnh | Tình huống | Quyết định cuối | Lý do theo schema |
 | --- | --- | --- | --- |
-| `drive_...` | | | |
-| `drive_...` | | | |
-| `drive_...` | | | |
+| `drive_012` | Xe khách cỡ nhỏ màu kem: thân hộp, đầu xe phẳng, có hàng cửa sổ khách dọc thân nhưng ngắn hơn xe buýt thường. Dễ nhầm với `van`. | `bus` | Schema ghi rõ `bus` gồm "minibus chở khách". Xe có hàng cửa sổ hành khách, cửa lên xuống riêng, dài hơn hẳn van cỡ xe con, nên là minibus, không phải van. |
+| `drive_014` | Xe van đỏ mui cao : cao và dài hơn xe con, có cửa sổ thân. Dễ nhầm với `bus`. | `van` | Một khối hộp liền, capo ngắn, chiều dài gần bằng xe con lớn; không có hàng ghế khách dài như minibus. Schema xếp xe van chở người vào `van`.|
+| `drive_014` | Xe cứu hộ có cần cẩu phía sau. Không phải xe tải chở hàng thông thường. | `truck` | Cabin tài xế tách riêng với phần sau (sàn kéo + cần cẩu), đúng đặc điểm phân biệt `truck` trong guideline. Không chở khách nên không phải `bus`/`van`. Gold cũng ghi `truck`. |
+| `drive_049` | Dãy xe đỗ dọc lề trái và xe rất nhỏ ở xa cuối đường. README ghi "xe đang đỗ vẫn là car", nhưng gold không gán các xe này. | Không gán xe đỗ ngoài lòng đường chính và xe quá nhỏ ở xa | Bản đầu tôi gán theo README. Sau gold QC, tôi thống nhất phạm vi với gold: chỉ gán xe trong vùng đường chính đủ gần camera |
